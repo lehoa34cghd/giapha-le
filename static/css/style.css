@@ -1,1 +1,188 @@
-*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#7b0505 url('/static/images/bg.jpg') center/cover fixed no-repeat;color:#fff;overflow:hidden}.top{height:62px;background:rgba(120,0,0,.92);border-bottom:3px solid #ffd45a;display:flex;justify-content:space-between;align-items:center;padding:0 22px}.top b{color:#ffdd64;font-size:24px}nav{display:flex;gap:14px;align-items:center}nav a,.dropdown{color:#fff;text-decoration:none;position:relative}.drop{display:none;position:absolute;background:#fff;color:#111;right:0;top:24px;min-width:140px;border-radius:8px;overflow:hidden;z-index:10}.drop a{display:block;color:#111;padding:10px}.dropdown:hover .drop{display:block}.badge{background:#ffdf3d;color:#900;border-radius:999px;padding:2px 7px;font-size:12px;margin-left:3px}.hero{height:calc(100vh - 62px);overflow:auto;cursor:grab;padding:25px 0 110px;background:rgba(80,0,0,.18)}.hero:active{cursor:grabbing}.hero h1{text-align:center;color:#ffdf65;text-shadow:1px 2px #600}.tree{min-width:1400px;text-align:center;padding:30px}.tree ul{padding-top:28px;position:relative;display:flex;justify-content:center}.tree li{list-style:none;position:relative;padding:28px 10px 0;text-align:center}.tree li:before,.tree li:after{content:'';position:absolute;top:0;width:50%;height:28px;border-top:2px solid #fff}.tree li:before{right:50%;border-right:2px solid #fff}.tree li:after{left:50%;border-left:2px solid #fff}.tree li:only-child:before,.tree li:only-child:after{display:none}.tree ul ul:before{content:'';position:absolute;top:0;left:50%;height:28px;border-left:2px solid #fff}.couple{display:inline-flex;gap:8px;align-items:center}.card{min-width:135px;background:rgba(255,255,255,.94);color:#111;border:2px solid #ffd45a;border-radius:12px;padding:8px;box-shadow:0 5px 15px #0008}.card b{display:block;color:#980000}.card span{font-size:12px}.spouse{background:#fff8d6}.actions{margin-top:6px;display:flex;justify-content:center;gap:6px}.actions a{font-size:12px;background:#9b0000;color:white;padding:3px 7px;border-radius:6px;text-decoration:none}.actions .del{background:#333}.plus-row{margin-top:6px}.plus{background:#ffd45a;color:#800;text-decoration:none;border-radius:999px;padding:4px 8px;font-weight:bold;margin:2px}.login,.formbox{max-width:520px;margin:80px auto;background:rgba(255,255,255,.94);color:#111;border-radius:14px;padding:25px;box-shadow:0 8px 30px #0008}.login h1{color:#900}.error{background:#ffd9d9;padding:8px;border-radius:8px}input,select,textarea{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #bbb;border-radius:8px}button{background:#990000;color:white;border:0;border-radius:8px;padding:10px 16px}.comment{background:#fff7d6;border-radius:8px;padding:10px;margin:10px 0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#7b0505;color:#fff;padding-bottom:46px}
+.top{background:linear-gradient(#d41b1b,#8b0606);border-bottom:4px solid #f5c04a;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:0;z-index:10}
+.brand{font-size:26px;font-weight:800;color:#ffd65a;text-shadow:1px 1px #000}
+nav a{color:#fff;margin-left:14px;text-decoration:none;position:relative;display:inline-block}
+nav a:hover{text-decoration:underline}
+.nav-comment{padding-right:8px}
+.badge{position:absolute;top:-10px;right:-14px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#ffd65a;color:#8b0606;font-size:12px;font-weight:800;line-height:18px;text-align:center;border:1px solid #fff}
+.hero{position:relative;min-height:calc(100vh - 66px);padding:26px 26px 70px;background:radial-gradient(circle at center,rgba(255,215,0,.16),transparent 38%),#9b0808;border:12px double #f3c14b;overflow:hidden}
+.hero:before,.hero:after{content:"LONG";position:absolute;top:36px;font-size:44px;color:#ffcf4d;font-weight:bold;opacity:.8;pointer-events:none}.hero:before{left:40px}.hero:after{right:40px}
+.title{text-align:center;color:#ffdf65;margin:5px 0 20px}.subtitle{text-align:center;color:#fff4b8;margin-top:-12px}
+.panel{background:rgba(255,255,255,.96);color:#222;border-radius:12px;padding:18px;max-width:1100px;margin:0 auto 18px;box-shadow:0 8px 30px rgba(0,0,0,.25)}.panel.small{max-width:420px}
+input,textarea,select{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ccc;border-radius:8px}
+button,.btn{background:#b50d0d;color:white;border:0;border-radius:8px;padding:10px 14px;cursor:pointer;text-decoration:none;display:inline-block}.secondary{background:#555}
+table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #ddd;padding:8px;text-align:left}.msg{background:#fff4cc;color:#5a3900;padding:10px;border-radius:8px;margin:10px 0}
+.search-bar{max-width:620px;margin:0 auto 12px;display:flex;gap:8px}.search-bar input,.inline input{margin:0}.search-bar button{white-space:nowrap}.inline{display:flex;gap:8px;margin-bottom:12px}.hint{text-align:center;color:#fff4b8;margin:0 0 12px;font-size:14px}
+.tree-scroll{width:100%;overflow:auto;padding:22px 0 80px;position:relative;z-index:1}.tree-wrap{min-width:1200px;text-align:center;padding:30px 20px 80px}.tree ul{padding-top:30px;position:relative;display:flex;justify-content:center}.tree li{list-style:none;text-align:center;position:relative;padding:30px 12px 0}.tree li:before,.tree li:after{content:'';position:absolute;top:0;width:50%;height:30px;border-top:2px solid #fff}.tree li:before{right:50%;border-right:2px solid #fff}.tree li:after{left:50%;border-left:2px solid #fff}.tree li:only-child:before,.tree li:only-child:after{display:none}.tree li:first-child:before,.tree li:last-child:after{border:0}.tree li:last-child:before{border-right:2px solid #fff;border-radius:0 8px 0 0}.tree li:first-child:after{border-radius:8px 0 0 0}.tree ul ul:before{content:'';position:absolute;top:0;left:50%;height:30px;border-left:2px solid #fff}
+.node-box{display:inline-block;position:relative;padding:0 34px 34px}.person{display:inline-block;min-width:138px;max-width:210px;background:#fff;color:#111;border:2px solid #f2c44b;border-radius:10px;padding:8px 10px;box-shadow:0 4px 12px rgba(0,0,0,.35);position:relative;z-index:2}.person .name{font-weight:800;color:#900}.person .life{font-size:12px;color:#555}.person a{font-size:12px;color:#0757a3}.root{background:#fff7c7;transform:scale(1.08)}
+.add-btn{position:absolute;width:26px;height:26px;border-radius:50%;background:#ffd65a;color:#8b0606;border:2px solid #fff;text-decoration:none;font-weight:900;line-height:22px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.35);z-index:3}.add-btn:hover{background:#fff;text-decoration:none}.add-left{left:2px;top:32px}.add-right{right:2px;top:32px}.add-child{left:50%;bottom:2px;transform:translateX(-50%)}
+.flowers{position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:24px;background:rgba(123,5,5,.92);padding:4px 6px;color:#ffd6df;z-index:0;pointer-events:none}.flowers:before{content:"";position:absolute;top:-22px;left:0;right:0;height:22px;background:linear-gradient(transparent,rgba(123,5,5,.92))}
+@media(max-width:800px){.top{display:block}.brand{font-size:20px;margin-bottom:8px}nav a{display:inline-block;margin:6px 8px 0 0}.hero:before,.hero:after{display:none}.search-bar,.inline{display:block}.tree-wrap{min-width:1000px}.hero{padding-left:12px;padding-right:12px}}
+
+/* V3: hiển thị vợ/chồng ngang bên cạnh, nút xóa, không che thanh kéo ngang */
+.couple-row{display:inline-flex;align-items:center;justify-content:center;gap:0;position:relative;z-index:2;vertical-align:top}.root-row{transform:scale(1.04)}.root-row .person{background:#fff7c7}.spouse-card{background:#fffaf0;border-style:dashed}.marriage-line{display:inline-block;width:28px;border-top:3px solid #ffd65a;margin:0 3px;box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.card-actions{display:flex;gap:5px;align-items:center;justify-content:center;margin-top:6px}.card-actions form,.inline-form{display:inline-block;margin:0}.mini-edit,.mini-delete{font-size:11px;border:0;border-radius:5px;padding:3px 6px;text-decoration:none}.mini-edit{background:#555;color:#fff}.mini-delete,.danger{background:#8a0000;color:#fff}.danger{border:0;border-radius:8px;padding:10px 14px;cursor:pointer}.inline-form button{margin-left:4px}.node-box{min-width:220px}.add-left{left:4px}.add-right{right:4px}
+.flowers{position:relative;z-index:1;margin-top:8px}.flowers:before{display:none}.tree-scroll{padding-bottom:120px;margin-bottom:12px}.hero{overflow:auto;padding-bottom:20px}body{padding-bottom:0}
+
+/* V4: form chọn rõ người thuộc nhánh hoặc vợ/chồng */
+.relation-box{border:1px solid #e2c36b;background:#fff9df;border-radius:12px;padding:12px;margin:8px 0 14px}.radio-line{display:block;margin:8px 0 6px;line-height:1.35}.radio-line input{width:auto;margin:0 8px 0 0}.radio-line span{display:block;color:#6b5a25;font-size:13px;margin:4px 0 0 26px}.disabled-select{opacity:.45;background:#eee}
+
+
+/* V5: bỏ góp ý trong từng ô, kéo ngang bằng chuột, xuất ảnh */
+.person a[href*="person"]{display:none}
+.tree-scroll{cursor:grab;user-select:none}.tree-scroll.dragging{cursor:grabbing}.tree-scroll.dragging *{user-select:none}
+.comment-form{margin-bottom:6px}.comment-form select{max-width:420px}
+.export-capture{position:relative;display:inline-block;min-width:1200px;background:radial-gradient(circle at center,rgba(255,215,0,.16),transparent 38%),#9b0808;border:12px double #f3c14b;padding:28px 36px 12px;color:#fff;overflow:visible}.export-capture:before,.export-capture:after{content:"LONG";position:absolute;top:36px;font-size:44px;color:#ffcf4d;font-weight:bold;opacity:.8}.export-capture:before{left:40px}.export-capture:after{right:40px}.export-wrap{padding-bottom:30px}.export-flowers{text-align:center;font-size:24px;color:#ffd6df;margin-top:10px}.export-tools{max-width:760px}.export-node{padding-bottom:0}.export-node .person{margin-bottom:0}
+
+/* V6: menu chế độ xem thay cho tìm kiếm trên thanh công cụ */
+.view-menu{display:inline-block;position:relative;margin-left:14px;color:#fff;vertical-align:middle}
+.view-menu-label{cursor:pointer;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)}
+.view-menu-list{display:none;position:absolute;top:32px;left:0;min-width:155px;background:#fff;color:#8b0606;border:2px solid #f5c04a;border-radius:10px;box-shadow:0 8px 22px rgba(0,0,0,.35);padding:6px;z-index:50}
+.view-menu:hover .view-menu-list{display:block}
+.view-menu-list a{display:block;color:#8b0606;margin:0;padding:9px 10px;border-radius:7px;text-decoration:none;font-weight:700}
+.view-menu-list a:hover{background:#fff4cc;text-decoration:none}
+@media(max-width:800px){.view-menu{display:block;margin:8px 0}.view-menu-list{position:static;margin-top:8px}}
+
+/* V7: background anh trang chinh - copy anh vao static/images/bg.jpg */
+body{
+  background:#7b0505;
+}
+.hero{
+  background-image:
+    linear-gradient(rgba(120,20,0,.08), rgba(120,20,0,.18)),
+    url('/static/images/bg.jpg'),
+    radial-gradient(circle at center,rgba(255,215,0,.16),transparent 38%);
+  background-color:#9b0808;
+  background-size:100% 58%, 100% 58%, auto;
+  background-repeat:no-repeat, no-repeat, no-repeat;
+  background-position:top center, top center, center center;
+}
+.hero.bg-full{
+  background-size:cover, cover, auto;
+}
+.title,.subtitle,.hint{
+  text-shadow:0 2px 4px rgba(0,0,0,.55);
+}
+.tree-scroll{
+  min-height:58vh;
+}
+.tree-wrap{
+  padding-top:90px;
+}
+.export-capture{
+  background-image:
+    linear-gradient(rgba(120,20,0,.08), rgba(120,20,0,.18)),
+    url('/static/images/bg.jpg'),
+    radial-gradient(circle at center,rgba(255,215,0,.16),transparent 38%);
+  background-color:#9b0808;
+  background-size:100% 58%, 100% 58%, auto;
+  background-repeat:no-repeat, no-repeat, no-repeat;
+  background-position:top center, top center, center center;
+}
+.export-capture .tree-wrap{
+  padding-top:90px;
+}
+@media(max-width:800px){
+  .hero{background-size:auto 50%, auto 50%, auto;background-position:top center, top center, center center}
+  .tree-wrap{padding-top:60px}
+}
+
+/* V8: nen anh gia toc ho Le toan trang, khi keo so do thi nen khong bi di chuyen */
+body{
+  background:#8b0606 url('/static/images/bg.jpg') center top / cover no-repeat fixed;
+}
+.hero{
+  background-image:
+    linear-gradient(rgba(255,190,0,.05), rgba(130,20,0,.10)),
+    url('/static/images/bg.jpg') !important;
+  background-color:#d68a00;
+  background-size:cover, cover !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-position:center top, center top !important;
+  background-attachment:fixed, fixed;
+  border:0;
+  padding-top:20px;
+}
+.hero:before,.hero:after{display:none !important}
+.tree-scroll{
+  background:transparent;
+  min-height:calc(100vh - 150px);
+  padding-top:170px;
+  padding-bottom:160px;
+}
+.tree-wrap{
+  padding-top:30px;
+}
+.title,.subtitle{
+  display:none;
+}
+.person{
+  background:rgba(255,255,255,.94);
+  border:2px solid #d9a323;
+}
+.root-row .person{
+  background:rgba(255,247,199,.96);
+}
+.flowers{
+  display:none;
+}
+.export-capture{
+  background-image:
+    linear-gradient(rgba(255,190,0,.05), rgba(130,20,0,.10)),
+    url('/static/images/bg.jpg') !important;
+  background-color:#d68a00;
+  background-size:cover, cover !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-position:center top, center top !important;
+  border:0;
+  min-height:1024px;
+  padding-top:180px;
+}
+.export-capture:before,.export-capture:after{display:none !important}
+.export-capture .tree-wrap{padding-top:30px}
+.export-flowers{display:none}
+@media(max-width:800px){
+  .hero{background-attachment:scroll, scroll;background-size:auto 100%, auto 100% !important;background-position:center top, center top !important}
+  .tree-scroll{padding-top:120px}
+}
+
+
+/* V9: nút Sửa nằm cạnh nút Xóa rõ ràng hơn trong chế độ Sửa đổi */
+.card-actions{gap:7px;margin-top:8px}
+.mini-edit,.mini-delete{font-size:12px;font-weight:700;border-radius:999px;padding:5px 9px;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.18);cursor:pointer}
+.mini-edit{background:#0b66c3;color:#fff}
+.mini-edit:hover{background:#084f96;text-decoration:none}
+.mini-delete{background:#b00000;color:#fff}
+.mini-delete:hover{background:#7d0000}
+
+
+/* V10: nút Sửa nằm ngay cạnh nút Xóa trong từng ô người */
+.card-actions{
+  display:flex !important;
+  flex-direction:row !important;
+  gap:6px !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin-top:8px !important;
+  position:relative !important;
+  z-index:20 !important;
+  white-space:nowrap !important;
+}
+.card-actions form{display:inline-flex !important;margin:0 !important;padding:0 !important;}
+.mini-edit,.mini-delete{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:24px !important;
+  padding:4px 9px !important;
+  border-radius:999px !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+  text-decoration:none !important;
+  border:0 !important;
+  cursor:pointer !important;
+}
+.mini-edit{background:#0b66c3 !important;color:#fff !important;}
+.mini-delete{background:#b00000 !important;color:#fff !important;}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="panel">
+  <h2>Tìm kiếm thành viên</h2>
+  <form class="inline" method="get">
+    <input name="q" value="{{ q }}" placeholder="Nhập họ tên, đời thứ, ghi chú...">
+    <button>Tìm</button>
+  </form>
+  {% if q %}
+    <p>Tìm thấy {{ rows|length }} kết quả cho: <b>{{ q }}</b></p>
+    <table>
+      <tr><th>Họ tên</th><th>Vai vế</th><th>Cấp trên</th><th>Ghi chú</th><th></th></tr>
+      {% for r in rows %}
+      <tr>
+        <td>{{ r.name }}</td>
+        <td>{{ r.title or '' }}</td>
+        <td>{{ r.parent_name or 'Gốc' }}</td>
+        <td>{{ r.note or '' }}</td>
+        <td><a class="btn" href="{{ url_for('person', person_id=r.id) }}">Xem</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+</div>
+{% endblock %}

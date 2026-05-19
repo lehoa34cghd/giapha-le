@@ -1,1 +1,50 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Gia phả họ Lê</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head><body>{% block content %}{% endblock %}<script src="{{ url_for('static', filename='js/drag.js') }}"></script></body></html>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gia phả dòng họ Lê{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">GIA PHẢ DÒNG HỌ LÊ</div>
+    {% if session.get('user') %}
+    <nav>
+      <span>Xin chào <b>{{ session.get('user') }}</b></span>
+      <a href="{{ url_for('index') }}">Sơ đồ</a>
+      {% if session.get('role') == 'admin' %}
+      <div class="view-menu">
+        <span class="view-menu-label">Chế độ xem: <b>{{ 'Sửa đổi' if view_mode == 'edit' else 'Công khai' }}</b> ▼</span>
+        <div class="view-menu-list">
+          <a href="{{ url_for('set_view_mode', mode='edit') }}">Sửa đổi</a>
+          <a href="{{ url_for('set_view_mode', mode='public') }}">Công khai</a>
+        </div>
+      </div>
+      {% endif %}
+      <a class="nav-comment" href="{{ url_for('comments') }}">
+        Góp ý
+        {% if pending_comments_count and pending_comments_count > 0 %}
+          <span class="badge">{{ pending_comments_count }}</span>
+        {% endif %}
+      </a>
+      {% if can_edit %}
+        <a href="{{ url_for('admin_people') }}">Quản trị</a>
+      {% endif %}
+      {% if session.get('role') == 'admin' %}
+        <a href="{{ url_for('export_excel') }}">Export Excel</a>
+        <a href="{{ url_for('export_image') }}">Export Ảnh</a>
+      {% endif %}
+      <a href="{{ url_for('logout') }}">Đăng xuất</a>
+    </nav>
+    {% endif %}
+  </header>
+
+  <main class="hero">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="flowers">❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀</footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

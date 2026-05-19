@@ -1,1 +1,85 @@
-{% extends 'base.html' %}{% block content %}<div class="formbox"><h2>{{'Sửa thông tin' if p else 'Thêm người'}}</h2><form method="post"><label>Họ tên</label><input name="name" required value="{{p.name if p else ''}}"><label>Vai vế</label><input name="title" value="{{p.title if p else ''}}"><label>Năm sinh</label><input name="birth" value="{{p.birth if p else ''}}"><label>Năm mất</label><input name="death" value="{{p.death if p else ''}}"><label>Thuộc nhánh của ai</label><select name="parent_id"><option value="">Không chọn</option>{% for x in people %}<option value="{{x.id}}" {% if parent_id|string==x.id|string %}selected{% endif %}>{{x.name}}</option>{% endfor %}</select><label>Vợ/chồng của ai</label><select name="spouse_id"><option value="">Không chọn</option>{% for x in people %}<option value="{{x.id}}" {% if spouse_id|string==x.id|string %}selected{% endif %}>{{x.name}}</option>{% endfor %}</select><label>Ghi chú</label><textarea name="note">{{p.note if p else ''}}</textarea><button>Lưu</button><a href="/?mode=edit">Quay lại</a></form></div>{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+<div class="panel">
+  <h2>{{ 'Thêm người' if person_id == 0 else 'Sửa thông tin' }}</h2>
+  {% if person_id == 0 and ref %}
+    <div class="msg">
+      Bạn bấm dấu + tại: <b>{{ ref.name }}</b>.<br>
+      Có thể chọn <b>Thuộc nhánh của ai</b> để tạo con/cùng đời, hoặc chọn <b>Vợ/chồng của ai</b> để người mới hiện ngang bên cạnh.
+    </div>
+  {% endif %}
+  <form method="post">
+    <label>Họ tên</label><input name="name" required value="{{ p.name if p else defaults.name }}">
+    <label>Vai vế / đời thứ</label><input name="title" value="{{ p.title if p and p.title else defaults.title }}">
+    <label>Năm sinh</label><input name="birth" value="{{ p.birth if p and p.birth else defaults.birth }}">
+    <label>Năm mất</label><input name="death" value="{{ p.death if p and p.death else defaults.death }}">
+    <label>Ghi chú vợ/chồng</label><input name="spouse" value="{{ p.spouse if p and p.spouse else defaults.spouse }}" placeholder="Có thể để trống nếu dùng mục 'Vợ/chồng của ai' bên dưới">
+    <label>Giới tính</label>
+    <select name="gender">
+      {% set g = p.gender if p else defaults.gender %}
+      <option value="unknown" {% if g == 'unknown' %}selected{% endif %}>Không rõ</option>
+      <option value="male" {% if g == 'male' %}selected{% endif %}>Nam</option>
+      <option value="female" {% if g == 'female' %}selected{% endif %}>Nữ</option>
+    </select>
+
+    {% set current_mode = 'spouse' if (p and p.spouse_of) else defaults.relation_mode %}
+    <div class="relation-box">
+      <label class="radio-line">
+        <input type="radio" name="relation_mode" value="branch" {% if current_mode != 'spouse' %}checked{% endif %} onchange="toggleRelationMode()">
+        <b>Thuộc nhánh của ai?</b>
+        <span>Tạo người trong nhánh. Nếu chọn một người làm cấp trên thì người mới sẽ hiện ở đời sau/con của người đó. Nếu chọn cùng cấp trên thì sẽ hiện cùng đời.</span>
+      </label>
+      <select name="parent_id" id="parentSelect">
+        {% set selected_parent = p.parent_id if p else defaults.parent_id %}
+        <option value="">-- Gốc / không có --</option>
+        {% for x in people %}
+          {% if not p or x.id != p.id %}
+          <option value="{{ x.id }}" {% if selected_parent == x.id %}selected{% endif %}>{{ x.name }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+
+      <label class="radio-line">
+        <input type="radio" name="relation_mode" value="spouse" {% if current_mode == 'spouse' %}checked{% endif %} onchange="toggleRelationMode()">
+        <b>Vợ/chồng của ai?</b>
+        <span>Tạo người nằm ngang bên cạnh người được chọn. Sau đó muốn tạo con thì bấm dấu + dưới người chính hoặc chọn người chính ở mục thuộc nhánh.</span>
+      </label>
+      <select name="spouse_of" id="spouseSelect">
+        {% set selected_spouse_of = p.spouse_of if p else defaults.spouse_of %}
+        <option value="">-- Chọn người có vợ/chồng --</option>
+        {% for x in people %}
+          {% if not p or x.id != p.id %}
+          <option value="{{ x.id }}" {% if selected_spouse_of == x.id %}selected{% endif %}>{{ x.name }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+
+    <label>Ghi chú</label><textarea name="note" rows="4">{{ p.note if p and p.note else defaults.note }}</textarea>
+    <button>Lưu</button>
+    <a class="btn secondary" href="{{ url_for('index') }}">Hủy</a>
+    {% if person_id != 0 %}
+      <button class="danger" type="submit" formaction="{{ url_for('delete_person', person_id=person_id) }}" formmethod="post" onclick="return confirm('Bạn chắc chắn muốn xóa người này? Nếu có con/cháu hoặc vợ/chồng gắn theo, hệ thống cũng xóa theo.')">Xóa</button>
+    {% endif %}
+  </form>
+</div>
+<script>
+function toggleRelationMode(){
+  const mode = document.querySelector('input[name="relation_mode"]:checked').value;
+  const parentSelect = document.getElementById('parentSelect');
+  const spouseSelect = document.getElementById('spouseSelect');
+  if(mode === 'spouse'){
+    parentSelect.disabled = true;
+    spouseSelect.disabled = false;
+    parentSelect.closest('select').classList.add('disabled-select');
+    spouseSelect.closest('select').classList.remove('disabled-select');
+  }else{
+    parentSelect.disabled = false;
+    spouseSelect.disabled = true;
+    parentSelect.closest('select').classList.remove('disabled-select');
+    spouseSelect.closest('select').classList.add('disabled-select');
+  }
+}
+document.addEventListener('DOMContentLoaded', toggleRelationMode);
+</script>
+{% endblock %}

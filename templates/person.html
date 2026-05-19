@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="panel">
+  <h2>{{ p.name }}</h2>
+  <p><b>Vai vế:</b> {{ p.title or '' }}</p>
+  <p><b>Sinh - mất:</b> {{ p.birth or '' }} - {{ p.death or '' }}</p>
+  <p><b>Vợ/chồng:</b> {{ p.spouse or '' }}</p>
+  <p>{{ p.note or '' }}</p>
+
+  <h3>Gửi góp ý cần sửa</h3>
+  <form method="post">
+    <textarea name="content" rows="4" required placeholder="Ví dụ: tên bị sai dấu, năm sinh cần sửa..."></textarea>
+    <button>Gửi góp ý</button>
+  </form>
+
+  <h3>Góp ý đã gửi</h3>
+  {% for c in comments %}
+    <div class="msg"><b>{{ c.username }}</b> - {{ c.created_at }}<br>{{ c.content }}<br><span>Trạng thái: {{ c.status }}</span></div>
+  {% else %}
+    <p>Chưa có góp ý.</p>
+  {% endfor %}
+</div>
+{% endblock %}
